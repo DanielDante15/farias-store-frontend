@@ -33,7 +33,7 @@ function HomeScreen() {
     },
     {
         "nome": "Lucas",
-        "idade": 27,
+        "idade": 28,
         "profissao": "contador"
     },
     {
