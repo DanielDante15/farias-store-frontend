@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
+import axios from "axios";
 
 function Login() {
 
@@ -8,14 +9,24 @@ function Login() {
     const [nome, setNome] = useState("")
     const [senha, setSenha] = useState("")
 
-    const teste = () => {
-        if (nome == 'caio' && senha == '123' || nome == 'dante' && senha == '123') {
-            router.push('/')
+    const handleLogin = async () => {
+        try {
+            const response = await axios.post('http://172.16.3.85:8000/login/', {
+                "username": nome,
+                "password": senha,
+            })
+            if (response.data['valid'] == true) {
+                router.push('/')
+            }
+            else{
+                document.getElementById('incorrect-modal').showModal();
+            }
+
+        } catch (error) {
+            
+            console.error('Error logging in:', error);
         }
-        else {
-            document.getElementById('my_modal_1').showModal();
-        }
-    }
+    };
 
     return (
         <div className="w-screen h-screen bg-gray-600">
@@ -43,19 +54,19 @@ function Login() {
                                 </label>
                             </div>
                             <div className="form-control mt-6">
-                                <button onClick={teste} className="btn btn-primary">Login</button>
+                                <button onClick={handleLogin} className="btn btn-primary">Login</button>
 
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <dialog id="my_modal_1" className="modal">
+            <dialog id="incorrect-modal" className="modal">
                 <div className="modal-box">
                     <h3 className="font-bold text-lg">Usuário ou Senha Incorretos</h3>
                     <p className="py-4">Por favor tente fazer Login novamente</p>
                     <div className="modal-action">
-                        <form method="dialog">  
+                        <form method="dialog">
                             {/* if there is a button in form, it will close the modal */}
                             <button className="btn" ><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />

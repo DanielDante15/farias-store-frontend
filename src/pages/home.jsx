@@ -8,9 +8,9 @@ function HomeScreen() {
 
     useEffect(() => {
         axios
-            .get('http://192.168.0.13:8000/tenis/')
+            .get('http://172.16.3.85:8000/tenis/')
             .then(response => {
-                setTenisData(response.data); // Atualize o estado com os dados recebidos
+                setTenisData(response.data); 
             })
             .catch(error => {
                 // Lidar com erros aqui

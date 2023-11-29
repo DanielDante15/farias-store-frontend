@@ -33,7 +33,7 @@ function Finalizar() {
 
     const deletarItemDaApi = async (itemId) => {
         try {
-          const response = await axios.delete(`http://192.168.0.13:8000/tenis/${itemId}`);
+          const response = await axios.delete(`http://172.16.3.85:8000/tenis/${itemId}`);
       
           if (response.status === 204) {
             console.log('Item excluído com sucesso');

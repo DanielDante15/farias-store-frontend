@@ -1,9 +1,11 @@
 import Card from "@/components/card";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 
 function Adicionar() {
+    const router = useRouter()
 
     const [nome, setNome] = useState('');
     const [descricao, setDescricao] = useState('');
@@ -13,44 +15,47 @@ function Adicionar() {
 
     const handleNomeChange = (event) => {
         setNome(event.target.value);
-      };
-    
-      const handleDescricaoChange = (event) => {
+    };
+
+    const handleDescricaoChange = (event) => {
         setDescricao(event.target.value);
-      };
-    
-      const handlePrecoChange = (event) => {
+    };
+
+    const handlePrecoChange = (event) => {
         setPreco(event.target.value);
-      };
-    
-      const handleImagem1Change = (event) => {
+    };
+
+    const handleImagem1Change = (event) => {
         setImagem1(event.target.files[0]);
-      };
-    
-      const handleImagem2Change = (event) => {
+    };
+
+    const handleImagem2Change = (event) => {
         setImagem2(event.target.files[0]);
-      };
+    };
 
 
-      const handleSubmit = async () => {
+    const handleSubmit = async (e) => {
+        e.preventDefault()
         const formData = new FormData();
         formData.append('nomeProd', nome);
         formData.append('descProd', descricao);
         formData.append('precoProd', preco);
         formData.append('img1', imagem1, imagem1.name);
         formData.append('img2', imagem2, imagem2.name);
-    
+
         try {
-          const response = await axios.post('http://192.168.0.13:8000/tenis/', formData, {
-            headers: {
-              'Content-Type': 'multipart/form-data',
-            },
-          });
+            const response = await axios.post('http://172.16.3.85:8000/tenis/', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            }).then(() => { router.push('/') });
+
+
 
         } catch (error) {
-          console.error('Erro ao adicionar o produto:', error.message);
+            console.error('Erro ao adicionar o produto:', error.message);
         }
-      };
+    };
 
 
 
@@ -60,22 +65,22 @@ function Adicionar() {
             <h1 className="pb-7 text-[23px]">Cadastro de Produtos</h1>
             <form className="flex flex-col space-y-4 items-center bg-[#696868] p-4 rounded-lg shadow-md max-w-md">
                 <label htmlFor="nome" className="text-white">Nome:</label>
-                <input type="text" id="nome" placeholder="Nome" value={nome} onChange={handleNomeChange}  className="input input-bordered w-full max-w-xs mb-4" />
+                <input type="text" id="nome" placeholder="Nome" value={nome} onChange={handleNomeChange} className="input input-bordered w-full max-w-xs mb-4" />
 
                 <label htmlFor="preco" className="text-white">Preço:</label>
-                <input type="text" id="preco" placeholder="Preço" value={preco} onChange={handlePrecoChange}  className="input input-bordered w-full max-w-xs mb-4" />
+                <input type="text" id="preco" placeholder="Preço" value={preco} onChange={handlePrecoChange} className="input input-bordered w-full max-w-xs mb-4" />
 
                 <label htmlFor="descricao" className="text-white">Descrição do Produto:</label>
                 <textarea className="input input-bordered w-full max-w-xs h-32 mb-4" value={descricao} onChange={handleDescricaoChange} />
-               
+
 
                 <label htmlFor="imagem1" className="text-white">Imagem 1:</label>
-                <input type="file" id="imagem1"  onChange={handleImagem1Change} className="file-input w-full max-w-xs mb-4" />
+                <input type="file" id="imagem1" onChange={handleImagem1Change} className="file-input w-full max-w-xs mb-4" />
 
                 <label htmlFor="imagem2" className="text-white">Imagem 2:</label>
                 <input type="file" id="imagem2" onChange={handleImagem2Change} className="file-input w-full max-w-xs mb-4" />
 
-                <button  onClick={handleSubmit} className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg">Cadastrar</button>
+                <button onClick={handleSubmit} className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg">Cadastrar</button>
 
             </form>
         </div>
