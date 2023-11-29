@@ -37,6 +37,7 @@ function Finalizar() {
       
           if (response.status === 204) {
             console.log('Item excluído com sucesso');
+            router.push('/')
           } else {
             console.log('Erro ao excluir o item');
           }
@@ -55,7 +56,7 @@ function Finalizar() {
                         <h1 className="text-5xl font-bold">{parametros.nome}</h1>
                         <p className="py-4 w-[400px] "> {parametros.desc}</p>
                         <h1 className="py-4 w-[400px] text-2xl ">R${parametros.preco}</h1>
-                        <button className="btn btn-primary" onClick={()=>{deletarItemDaApi(3)}}>Finalizar Compra</button>
+                        <button className="btn btn-primary" onClick={()=>{deletarItemDaApi(parametros.id)}}>Finalizar Compra</button>
                     </div>
                 </div>
             </div>
