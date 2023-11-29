@@ -6,10 +6,9 @@ import { useEffect, useState } from "react";
 function HomeScreen() {
     const [tenisData, setTenisData] = useState([]);
 
-
     useEffect(() => {
         axios
-            .get('http://192.168.1.101:8000/tenis/')
+            .get('http://192.168.0.13:8000/tenis/')
             .then(response => {
                 setTenisData(response.data); // Atualize o estado com os dados recebidos
             })
@@ -18,8 +17,6 @@ function HomeScreen() {
                 console.error('Erro na requisição:', error);
             });
     }, []);
-
-
 
     return (<>
         <div className=" flex justify-center bg-[#222] z-0 text-center h-full w-full  ">
@@ -30,9 +27,6 @@ function HomeScreen() {
                 ))}
 
             </div>
-
-
-
         </div>
     </>);
 }

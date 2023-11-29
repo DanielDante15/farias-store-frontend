@@ -3,6 +3,7 @@ import HomeScreen from './home'
 import Footer from '@/components/footer'
 
 export default function Home() {
+  
   return (
     <>
       <div className="absolute w-full bg-[#222]">
@@ -11,11 +12,9 @@ export default function Home() {
         </header>
         <div className=" mt-40">
           <HomeScreen />
-
         </div>
         <Footer />
       </div>
     </>
-
   )
 }
