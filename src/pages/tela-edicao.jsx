@@ -1,15 +1,14 @@
-import Card from "@/components/card";
+import { useEffect,useState } from "react";
 import axios from "axios";
-import { useEffect, useState } from "react";
-
-function HomeScreen() {
+import CardEdicao from "@/components/edit-card";
+function TelaEdicao() {
     const [tenisData, setTenisData] = useState([]);
 
     useEffect(() => {
         axios
             .get('http://127.0.0.1:8000/tenis/')
             .then(response => {
-                setTenisData(response.data); 
+                setTenisData(response.data);
             })
             .catch(error => {
                 // Lidar com erros aqui
@@ -22,8 +21,7 @@ function HomeScreen() {
 
             <div className="flex flex-wrap w-1/2">
                 {tenisData.map((tenisItem, index) => (
-                    <Card key={index} data={tenisItem} />
-                    
+                    <CardEdicao key={index} data={tenisItem} />
                 ))}
 
             </div>
@@ -31,4 +29,4 @@ function HomeScreen() {
     </>);
 }
 
-export default HomeScreen;
+export default TelaEdicao;

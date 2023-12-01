@@ -34,6 +34,7 @@ function NavBar() {
                                 <label htmlFor="my-drawer" className="drawer-overlay"></label>
                                 <ul className="menu p-4 w-80 min-h-full  bg-base-200 text-base-content">
                                     <li onClick={()=>{router.push('adicionar')}}><a>Adicionar Tenis</a></li>
+                                    <li onClick={()=>{router.push('tela-edicao')}}><a>Editar um Tenis</a></li>
                                     
                                 </ul>
                             </div>
